@@ -29,9 +29,18 @@ router.get('/cale', async (req, res, next) => {
   doc.fecha = dayString
   await doc.save();
   
-
   res.json([{hoy:dayString}])
 });
+
+
+router.get('/getCale', async (req, res, next) => {
+ 
+ const fecha = await Fecha.find();
+
+ res.json([{fechas:fecha}])
+});
+
+
 
 router.get('/turn/:id', async (req, res, next) => {
   let { id } = req.params;
