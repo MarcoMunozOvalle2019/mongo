@@ -1,0 +1,66 @@
+<% include partials/_header %>
+
+<div class="container">
+
+  <div class="row">
+    <!--FORM-->
+    <div class="col-md-5">
+      <div class="card">
+        <div class="card-body">
+
+
+          <form action="/cale" method="post">
+            <button class="btn btn-primary" type="submit" name="mensa" value="remedio1">
+              Remedio1
+            </button>
+            <button class="btn btn-primary" type="submit"  name="mensa" value="remedio2">
+              Remedio2
+            </button>
+            <button class="btn btn-primary" type="submit"  name="mensa" value="remedio3">
+              Remedio3
+            </button>
+          </form>
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+    <!-- LIST -->
+    <div class="col-md-7">
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th>N°</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>Operations</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% for(var i=0; i < fechas.length; i++) { %>
+            <tr>
+              <td><%= i + 1%></td>
+              <td><strong><%= fechas[i].nota %></strong></td>
+              <td><%= fechas[i].fecha %></td>
+
+              <td>
+
+                <a href="/deleteRemedio/<%= fechas[i]._id %>"
+                  class="btn btn-danger">
+                  Delete
+                </a>
+
+              </td>
+            </tr>
+          <% } %>
+        </tbody>
+      </table>
+
+    </div>
+  </div>
+
+</div>
+

@@ -19,26 +19,33 @@ router.post('/add', async (req, res, next) => {
   res.redirect('/');
 });
 
-router.get('/cale', async (req, res, next) => {
+
+router.post('/cale', async (req, res, next) => {
    var moment = require('moment-timezone');
   var day = new Date()
   var dayWrapper = moment(day); 
   var dayString = dayWrapper.format("DD/MM/YYYY H:mm:ss");
 
   const doc = new Fecha();
-  doc.nota = 'nota1'
+  //console.log('body',req.body)
+  doc.nota = req.body.mensa
   doc.fecha = dayString
   await doc.save();
   
-  res.json([{hoy:dayString}])
+  //res.json([{hoy:dayString}])
+  res.redirect('/getCale');
 });
 
 
 router.get('/getCale', async (req, res, next) => {
  
- const fecha = await Fecha.find();
+ const fechas = await Fecha.find();
 
- res.json([{fechas:fecha}])
+//const tasks = await Task.find();
+  console.log('marco123',fechas)
+  res.render('remedios', {fechas});
+
+// res.json([{fechas:fecha}])
 });
 
 
@@ -70,5 +77,10 @@ router.get('/delete/:id', async (req, res, next) => {
   res.redirect('/');
 });
 
+router.get('/deleteRemedio/:id', async (req, res, next) => {
+  let { id } = req.params;
+  await Fecha.remove({_id: id});
+  res.redirect('/getCale');
+});
 
 module.exports = router;
