@@ -19,13 +19,7 @@ router.post('/add', async (req, res, next) => {
 });
 
 router.get('/cale', async (req, res, next) => {
-  // var moment = require('moment-timezone');
-  // moment().tz("America/Santiago").format()
-  // let today = moment(new Date());
-
-
-  var now = new Date()
-  const tt=today.toString().substr(0, now.toString().indexOf(' GMT'))
+   var moment = require('moment-timezone');
   var day = new Date()
   var dayWrapper = moment(day); 
   var dayString = dayWrapper.format("DD/MM/YYYY H:mm:ss");
