@@ -26,6 +26,7 @@ router.get('/cale', async (req, res, next) => {
   var dayString = dayWrapper.format("DD/MM/YYYY H:mm:ss");
 
   const doc = new Fecha();
+  doc.nota = 'nota1'
   doc.fecha = dayString
   await doc.save();
   
