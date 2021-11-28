@@ -10,10 +10,18 @@ router.get('/', async (req, res) => {
   });
 });
 
+
+
 router.post('/add', async (req, res, next) => {
   const task = new Task(req.body);
   await task.save();
   res.redirect('/');
+});
+
+router.get('/cale', async (req, res, next) => {
+  var moment = require('moment');
+  let today     = moment(new Date());
+  res.json({marco:today})
 });
 
 router.get('/turn/:id', async (req, res, next) => {
