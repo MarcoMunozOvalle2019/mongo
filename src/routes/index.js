@@ -19,14 +19,9 @@ router.post('/add', async (req, res, next) => {
 });
 
 router.get('/cale', async (req, res, next) => {
-  //var moment = require('moment');
-  //import moment from "moment-timezone";
-  var moment = require('moment-timezone');
-
-  
-  // moment.tz.setDefault('America/Santiago');
-  moment().tz("America/Santiago").format()
-  let today = moment(new Date());
+  // var moment = require('moment-timezone');
+  // moment().tz("America/Santiago").format()
+  // let today = moment(new Date());
 
 
   var now = new Date()
@@ -35,7 +30,7 @@ router.get('/cale', async (req, res, next) => {
   var dayWrapper = moment(day); 
   var dayString = dayWrapper.format("DD/MM/YYYY H:mm:ss");
   
-  res.json([{marco1:today},{marco2:dayString}])
+  res.json([{hoy:dayString}])
 });
 
 router.get('/turn/:id', async (req, res, next) => {
