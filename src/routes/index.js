@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Task = require('../model/task');
+const Fecha = require('../model/date');
 
 router.get('/', async (req, res) => {
   const tasks = await Task.find();
@@ -23,7 +24,12 @@ router.get('/cale', async (req, res, next) => {
   var day = new Date()
   var dayWrapper = moment(day); 
   var dayString = dayWrapper.format("DD/MM/YYYY H:mm:ss");
+
+  const doc = new Fecha();
+  doc.fecha = dayString
+  await doc.save();
   
+
   res.json([{hoy:dayString}])
 });
 
