@@ -5,7 +5,7 @@ const Fecha = require('../model/date');
 
 router.get('/', async (req, res) => {
   const tasks = await Task.find();
-  console.log('marco123',tasks)
+  //console.log('marco123',tasks)
   res.render('index', {
     tasks
   });
@@ -30,7 +30,7 @@ async function intervalFunc() {
   var moment = require('moment-timezone');
   var day = new Date()
   var dayWrapper = moment(day); 
-  dayString = dayWrapper.format("mm");
+  dayString = dayWrapper.format("H");
 
   var day1 = new Date()
   var dayWrapper = moment(day1); 
@@ -103,7 +103,7 @@ const re3='farmaco3'
 
 
 router.get('/play', async (req, res, next) => {
-  handle=setInterval(intervalFunc, 10000);
+  handle=setInterval(intervalFunc, 10*60*1000); //cada 10 min
 })
 router.get('/stop', async (req, res, next) => {
   count = 0;
@@ -213,7 +213,7 @@ router.get('/turn/:id', async (req, res, next) => {
 
 router.get('/edit/:id', async (req, res, next) => {
   const task = await Task.findById(req.params.id);
-  console.log(task)
+  //console.log(task)
   res.render('edit', { task });
 });
 
