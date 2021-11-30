@@ -1,3 +1,4 @@
+
 const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
@@ -29,3 +30,4 @@ app.use('/', indexRoutes);
 app.listen(app.get('port'), () => {
   console.log(`server on port ${app.get('port')}`);
 });
+process.env["NODE_TLS_REJECT_UNAUTHORIZED"] = 0;

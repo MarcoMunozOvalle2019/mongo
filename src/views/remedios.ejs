@@ -4,21 +4,21 @@
 
   <div class="row">
     <!--FORM-->
-    <div class="col-md-5">
+    <!-- <div class="col-md-5">
       <div class="card">
         <div class="card-body">
 
 
           <form action="/cale" method="post">
-            <button class="btn btn-primary" type="submit" name="mensa" value="remedio1">
+            <button class="btn btn-primary" type="submit" name="mensa" value="RemedioNNHGHFFF1">
               Remedio1
             </button>
             <button class="btn btn-primary" type="submit"  name="mensa" value="remedio2">
               Remedio2
             </button>
-            <button class="btn btn-primary" type="submit"  name="mensa" value="remedio3">
+            <button class="btn btn-primary" type="submit"  name="mensa" value="Remed3">
               Remedio3
-            </button>
+            </button> 
           </form>
 
 
@@ -26,7 +26,7 @@
 
         </div>
       </div>
-    </div>
+    </div> -->
 
     <!-- LIST -->
     <div class="col-md-7">
@@ -34,9 +34,9 @@
         <thead>
           <tr>
             <th>N°</th>
-            <th>Title</th>
-            <th>Description</th>
-            <th>Operations</th>
+            <th>Remedio</th>
+            <th>Fecha</th>
+            <th>Accion</th>
           </tr>
         </thead>
         <tbody>
@@ -50,7 +50,7 @@
 
                 <a href="/deleteRemedio/<%= fechas[i]._id %>"
                   class="btn btn-danger">
-                  Delete
+                  Listo!, me tome <%= fechas[i].nota %>
                 </a>
 
               </td>
