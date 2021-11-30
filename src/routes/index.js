@@ -175,13 +175,13 @@ async function main() {
 //**** */
 
       //send mail with defined transport object
-      // let info = await transporter.sendMail({
-      //   from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
-      //   to: "juanPerez2022@gmx.es", // list of receivers
-      //   subject: "Recuerda ✔", // Subject line
-      //   text: 'hh', // plain text body
-      //   html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
-      // });
+      let info = await transporter.sendMail({
+        from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
+        to: "juanPerez2022@gmx.es", // list of receivers
+        subject: "Recuerda ✔", // Subject line
+        text: 'hh', // plain text body
+        html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
+      });
 
       //console.log("Message sent: %s", info.messageId);
       //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
