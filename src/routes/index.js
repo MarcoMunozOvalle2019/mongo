@@ -32,15 +32,19 @@ async function intervalFunc() {
   var moment = require('moment-timezone');
   var day = new Date()
   var dayWrapper = moment(day); 
-  dayString = dayWrapper.format("H");
+  dayString = dayWrapper.format("DD");
 
   var day1 = new Date()
   var dayWrapper = moment(day1); 
   var dayString1 = dayWrapper.format("DD/MM/YYYY H:mm:ss");
 
-const re1='farmaco1'
-const re2='farmaco2'
-const re3='farmaco3'
+const re1='Remedio1'
+const re2='Remedio2'
+const re3='Remedio3'
+const re4='Remedio4'
+const re5='Remedio5'
+const re6='Remedio6'
+const re7='Remedio7'
 
   if(anterior !== dayString){
 
@@ -87,6 +91,63 @@ const re3='farmaco3'
         console.log('graba rem3')
         await doc3.save();
     }
+
+
+   //consulta remedio4 si esta envia email
+   const myVal4 = fechas.find(function(element) {
+    return element.nota === re4;
+  });
+  if(myVal4?.nota===undefined){
+      const doc4 = new Fecha();
+      doc4.nota = re4
+      doc4.fecha = dayString1
+      console.log('graba rem4')
+      await doc4.save();
+  }
+
+
+   //consulta remedio5 si esta envia email
+   const myVal5 = fechas.find(function(element) {
+    return element.nota === re5;
+  });
+  if(myVal5?.nota===undefined){
+      const doc5 = new Fecha();
+      doc5.nota = re5
+      doc5.fecha = dayString1
+      console.log('graba rem5')
+      await doc5.save();
+  }
+
+
+
+   //consulta remedio6 si esta envia email
+   const myVal6 = fechas.find(function(element) {
+    return element.nota === re6;
+  });
+  if(myVal6?.nota===undefined){
+      const doc6 = new Fecha();
+      doc6.nota = re6
+      doc6.fecha = dayString1
+      console.log('graba rem6')
+      await doc6.save();
+  }
+
+
+
+   //consulta remedio7 si esta envia email
+   const myVal7 = fechas.find(function(element) {
+    return element.nota === re7;
+  });
+  if(myVal7?.nota===undefined){
+      const doc7 = new Fecha();
+      doc7.nota = re7
+      doc7.fecha = dayString1
+      console.log('graba rem7')
+      await doc7.save();
+  }
+
+
+
     count = 0;
     anterior=dayString
   }
@@ -106,7 +167,7 @@ const re3='farmaco3'
 
 
 router.get('/play', async (req, res, next) => {
-  handle=setInterval(intervalFunc, 10*60*1000); //cada 10 min
+  handle=setInterval(intervalFunc, 20*60*1000); //cada 20 min
   res.send('/play');
 })
 router.get('/stop', async (req, res, next) => {
@@ -150,11 +211,13 @@ async function email(fechas) {
       //send mail with defined transport object
       let info = await transporter.sendMail({
         from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
-        to: "juanPerez2022@gmx.es", // list of receivers
-        subject: "Recuerda ✔", // Subject line
+        to: "rdaniela4@gmail.com", // list of receivers
+        subject: "Se han olvidado estos remedios ✔", // Subject line
         text: 'hh', // plain text body
         html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
-      });
+      }).catch(function(error) {
+        console.log('fallo:', error);
+       });
 }
 
 
