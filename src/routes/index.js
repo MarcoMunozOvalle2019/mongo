@@ -106,12 +106,12 @@ const re3='farmaco3'
 
 router.get('/play', async (req, res, next) => {
   handle=setInterval(intervalFunc, 10*60*1000); //cada 10 min
-  //res.redirect('/play');
+  res.send('/play');
 })
 router.get('/stop', async (req, res, next) => {
   count = 0;
   clearInterval(handle);
-  //res.redirect('/play');
+  res.send('/play');
 })
 
 
