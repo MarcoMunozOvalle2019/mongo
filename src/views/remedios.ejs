@@ -1,5 +1,4 @@
 <% include partials/_header %>
-
 <div class="container">
 
   <div class="row">
@@ -32,7 +31,7 @@
     <div class="col-md-7">
       <table class="table table-bordered table-hover">
         <thead>
-          <tr>
+          <tr style="font-size:3vw">
             <th>N°</th>
             <th>Remedio</th>
             <th>Fecha</th>
@@ -41,14 +40,14 @@
         </thead>
         <tbody>
           <% for(var i=0; i < fechas.length; i++) { %>
-            <tr>
+            <tr style="font-size:3vw">
               <td><%= i + 1%></td>
-              <td><strong><%= fechas[i].nota %></strong></td>
-              <td><%= fechas[i].fecha %></td>
+              <td ><strong><%= fechas[i].nota %></strong></td>
+              <td ><%= fechas[i].fecha %></td>
 
               <td>
 
-                <a href="/deleteRemedio/<%= fechas[i]._id %>/<%= fechas[i].nota %>"
+                <a style="font-size:5vw" href="/deleteRemedio/<%= fechas[i]._id %>/<%= fechas[i].nota %>"
                   class="btn btn-danger">
                   Listo!, me tome <%= fechas[i].nota %>
                 </a>
