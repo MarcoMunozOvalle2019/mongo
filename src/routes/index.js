@@ -42,10 +42,15 @@ const re3='farmaco3'
 
   if(anterior !== dayString){
 
-    //consulta remedio1 si esta envia email
     const fechas = await Fecha.find();
-
     console.log('hh=',fechas)
+    if(fechas.length > 0)
+    {
+      email(fechas).catch(console.error);
+      console.log('enviando email',fechas)
+    }
+
+    //consulta remedio1 si esta envia email
     const myVal1 = fechas.find(function(element) {
       return element.nota === re1;
     });
@@ -54,21 +59,9 @@ const re3='farmaco3'
         const doc1 = new Fecha();
         doc1.nota = re1
         doc1.fecha = dayString1
+        console.log('graba rem1')
         await doc1.save();
-    }else{
-      console.log('envia correo remedio1')
-      const doc1 = new Fecha();
-      doc1.nota = re1
-      doc1.fecha = dayString1
-      const gg = [
-        {
-          nota: doc1.nota,
-          fecha: dayString1,
-        }
-      ]
-      email(gg).catch(console.error);
     }
-
 
     //consulta remedio2 si esta envia email
     const myVal2 = fechas.find(function(element) {
@@ -78,21 +71,9 @@ const re3='farmaco3'
         const doc2 = new Fecha();
         doc2.nota = re2
         doc2.fecha = dayString1
+        console.log('graba rem2')
         await doc2.save();
-    }else{
-      console.log('envia correo remedio2')
-      const doc2 = new Fecha();
-      doc2.nota = re2
-      doc2.fecha = dayString1
-      const gg = [
-        {
-          nota: doc2.nota,
-          fecha: dayString1,
-        }
-      ]
-      email(gg).catch(console.error);
     }
-
 
    //consulta remedio3 si esta envia email
     const myVal3 = fechas.find(function(element) {
@@ -102,21 +83,9 @@ const re3='farmaco3'
         const doc3 = new Fecha();
         doc3.nota = re3
         doc3.fecha = dayString1
+        console.log('graba rem3')
         await doc3.save();
-    }else{
-      console.log('envia correo remedio3')
-      const doc3 = new Fecha();
-      doc3.nota = re3
-      doc3.fecha = dayString1
-      const gg = [
-        {
-          nota: doc3.nota,
-          fecha: dayString1,
-        }
-      ]
-      email(gg).catch(console.error);
     }
-
     count = 0;
     anterior=dayString
   }
@@ -136,11 +105,13 @@ const re3='farmaco3'
 
 
 router.get('/play', async (req, res, next) => {
-  handle=setInterval(intervalFunc, 10*60*10000); //cada 10 min
+  handle=setInterval(intervalFunc, 10*60*1000); //cada 10 min
+  //res.redirect('/play');
 })
 router.get('/stop', async (req, res, next) => {
   count = 0;
   clearInterval(handle);
+  //res.redirect('/play');
 })
 
 
@@ -165,13 +136,13 @@ async function email(fechas) {
         }    
       });
 
-      // var content = fechas.reduce(function(a, b) {
-      //   return a + '<tr><td>' + b.nota + '</a></td><td>' + b.fecha + '</td><td>' ;
-      // }, '');
+      var content = fechas.reduce(function(a, b) {
+        return a + '<tr><td>' + b.nota + '</a></td><td>' + b.fecha + '</td><td>' ;
+      }, '');
 
-      var content = fechas.map((m)=>{
-        return '<tr><td>' + m.nota + '</a></td><td>' + m.fecha + '</td><td>' 
-      })
+      // var content = fechas.map((m)=>{
+      //   return '<tr><td>' + m.nota + '</a></td><td>' + m.fecha + '</td><td>' 
+      // })
 
 
       console.log('email=',content)
