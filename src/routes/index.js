@@ -44,9 +44,12 @@ const re3='farmaco3'
 
     //consulta remedio1 si esta envia email
     const fechas = await Fecha.find();
+
+    console.log('hh=',fechas)
     const myVal1 = fechas.find(function(element) {
       return element.nota === re1;
     });
+    
     if(myVal1?.nota===undefined){
         const doc1 = new Fecha();
         doc1.nota = re1
@@ -54,6 +57,16 @@ const re3='farmaco3'
         await doc1.save();
     }else{
       console.log('envia correo remedio1')
+      const doc1 = new Fecha();
+      doc1.nota = re1
+      doc1.fecha = dayString1
+      const gg = [
+        {
+          nota: doc1.nota,
+          fecha: dayString1,
+        }
+      ]
+      email(gg).catch(console.error);
     }
 
 
@@ -68,6 +81,16 @@ const re3='farmaco3'
         await doc2.save();
     }else{
       console.log('envia correo remedio2')
+      const doc2 = new Fecha();
+      doc2.nota = re2
+      doc2.fecha = dayString1
+      const gg = [
+        {
+          nota: doc2.nota,
+          fecha: dayString1,
+        }
+      ]
+      email(gg).catch(console.error);
     }
 
 
@@ -82,6 +105,16 @@ const re3='farmaco3'
         await doc3.save();
     }else{
       console.log('envia correo remedio3')
+      const doc3 = new Fecha();
+      doc3.nota = re3
+      doc3.fecha = dayString1
+      const gg = [
+        {
+          nota: doc3.nota,
+          fecha: dayString1,
+        }
+      ]
+      email(gg).catch(console.error);
     }
 
     count = 0;
@@ -103,7 +136,7 @@ const re3='farmaco3'
 
 
 router.get('/play', async (req, res, next) => {
-  handle=setInterval(intervalFunc, 10*60*1000); //cada 10 min
+  handle=setInterval(intervalFunc, 10*60*10000); //cada 10 min
 })
 router.get('/stop', async (req, res, next) => {
   count = 0;
@@ -111,7 +144,50 @@ router.get('/stop', async (req, res, next) => {
 })
 
 
+//****** funcion envia email */
 
+const nodemailer = require("nodemailer");
+
+async function email(fechas) {
+      let testAccount = await nodemailer.createTestAccount();
+
+      let transporter = nodemailer.createTransport({
+        host: 'mail.gmx.com',
+        port: 587,
+        tls: {
+            ciphers:'SSLv3',
+            rejectUnauthorized: false
+        },
+        debug:true,
+            auth: {
+            user: 'juanPerez2022@gmx.es',
+            pass: 'juanitoperez2022'
+        }    
+      });
+
+      // var content = fechas.reduce(function(a, b) {
+      //   return a + '<tr><td>' + b.nota + '</a></td><td>' + b.fecha + '</td><td>' ;
+      // }, '');
+
+      var content = fechas.map((m)=>{
+        return '<tr><td>' + m.nota + '</a></td><td>' + m.fecha + '</td><td>' 
+      })
+
+
+      console.log('email=',content)
+      //send mail with defined transport object
+      let info = await transporter.sendMail({
+        from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
+        to: "juanPerez2022@gmx.es", // list of receivers
+        subject: "Recuerda ✔", // Subject line
+        text: 'hh', // plain text body
+        html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
+      });
+}
+
+
+
+//*******fin funcion envia email */
 
 router.post('/cale', async (req, res, next) => {
    var moment = require('moment-timezone');
@@ -128,6 +204,7 @@ router.post('/cale', async (req, res, next) => {
   //res.json([{hoy:dayString}])
   res.redirect('/getCale');
 });
+
 
 
 router.get('/getCale', async (req, res, next) => {
@@ -175,13 +252,13 @@ async function main() {
 //**** */
 
       //send mail with defined transport object
-      let info = await transporter.sendMail({
-        from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
-        to: "juanPerez2022@gmx.es", // list of receivers
-        subject: "Recuerda ✔", // Subject line
-        text: 'hh', // plain text body
-        html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
-      });
+      // let info = await transporter.sendMail({
+      //   from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
+      //   to: "juanPerez2022@gmx.es", // list of receivers
+      //   subject: "Recuerda ✔", // Subject line
+      //   text: 'hh', // plain text body
+      //   html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
+      // });
 
       //console.log("Message sent: %s", info.messageId);
       //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
