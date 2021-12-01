@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const Task = require('../model/task');
 const Fecha = require('../model/date');
+const Historico = require('../model/historico');
+
 
 router.get('/', async (req, res) => {
   const tasks = await Task.find();
@@ -54,7 +56,6 @@ const re3='farmaco3'
     const myVal1 = fechas.find(function(element) {
       return element.nota === re1;
     });
-    
     if(myVal1?.nota===undefined){
         const doc1 = new Fecha();
         doc1.nota = re1
@@ -187,57 +188,57 @@ router.get('/getCale', async (req, res, next) => {
 
 
 
-//***** enviandop emai*/
+// //***** enviandop emai*/
 
-"use strict";
-const nodemailer = require("nodemailer");
+// "use strict";
+// const nodemailer = require("nodemailer");
 
-// async..await is not allowed in global scope, must use a wrapper
-async function main() {
-      // Generate test SMTP service account from ethereal.email
-      // Only needed if you don't have a real mail account for testing
-      let testAccount = await nodemailer.createTestAccount();
+// // async..await is not allowed in global scope, must use a wrapper
+// async function main() {
+//       // Generate test SMTP service account from ethereal.email
+//       // Only needed if you don't have a real mail account for testing
+//       let testAccount = await nodemailer.createTestAccount();
 
-      // create reusable transporter object using the default SMTP transport
-      let transporter = nodemailer.createTransport({
-        host: 'mail.gmx.com',
-        port: 587,
-        tls: {
-            ciphers:'SSLv3',
-            rejectUnauthorized: false
-        },
-        debug:true,
-            auth: {
-            user: 'juanPerez2022@gmx.es',
-            pass: 'juanitoperez2022'
-        }    
-      });
+//       // create reusable transporter object using the default SMTP transport
+//       let transporter = nodemailer.createTransport({
+//         host: 'mail.gmx.com',
+//         port: 587,
+//         tls: {
+//             ciphers:'SSLv3',
+//             rejectUnauthorized: false
+//         },
+//         debug:true,
+//             auth: {
+//             user: 'juanPerez2022@gmx.es',
+//             pass: 'juanitoperez2022'
+//         }    
+//       });
 
-//**** */
-// const hh=`Hola olvidaste. ${esto}!`
-// console.log('kkkkk',hh)
- var content = fechas.reduce(function(a, b) {
-  return a + '<tr><td>' + b.nota + '</a></td><td>' + b.fecha + '</td><td>' ;
-}, '');
-//console.log(content);
-//**** */
+// //**** */
+// // const hh=`Hola olvidaste. ${esto}!`
+// // console.log('kkkkk',hh)
+//  var content = fechas.reduce(function(a, b) {
+//   return a + '<tr><td>' + b.nota + '</a></td><td>' + b.fecha + '</td><td>' ;
+// }, '');
+// //console.log(content);
+// //**** */
 
-      //send mail with defined transport object
-      // let info = await transporter.sendMail({
-      //   from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
-      //   to: "juanPerez2022@gmx.es", // list of receivers
-      //   subject: "Recuerda ✔", // Subject line
-      //   text: 'hh', // plain text body
-      //   html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
-      // });
+//       //send mail with defined transport object
+//       // let info = await transporter.sendMail({
+//       //   from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
+//       //   to: "juanPerez2022@gmx.es", // list of receivers
+//       //   subject: "Recuerda ✔", // Subject line
+//       //   text: 'hh', // plain text body
+//       //   html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
+//       // });
 
-      //console.log("Message sent: %s", info.messageId);
-      //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-}
+//       //console.log("Message sent: %s", info.messageId);
+//       //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
+// }
 
-main().catch(console.error);
+// main().catch(console.error);
 
-//***** fin envia correo */  
+// //***** fin envia correo */  
 
 
 
@@ -277,8 +278,19 @@ router.get('/delete/:id', async (req, res, next) => {
   res.redirect('/');
 });
 
-router.get('/deleteRemedio/:id', async (req, res, next) => {
-  let { id } = req.params;
+router.get('/deleteRemedio/:id/:nota', async (req, res, next) => {
+  let { id, nota } = req.params;
+
+  var moment = require('moment-timezone');
+  var day = new Date()
+  var dayWrapper = moment(day); 
+  var fecs = dayWrapper.format("DD/MM/YYYY H:mm:ss");
+
+  const doc4 = new Historico();
+  doc4.nota = nota
+  doc4.fecha = fecs
+  await doc4.save();  
+
   await Fecha.remove({_id: id});
   res.redirect('/getCale');
 });
