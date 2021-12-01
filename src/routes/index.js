@@ -38,13 +38,12 @@ async function intervalFunc() {
   var dayWrapper = moment(day1); 
   var dayString1 = dayWrapper.format("DD/MM/YYYY H:mm:ss");
 
-const re1='Remedio1'
-const re2='Remedio2'
-const re3='Remedio3'
-const re4='Remedio4'
-const re5='Remedio5'
-const re6='Remedio6'
-const re7='Remedio7'
+const re1='Ciclomex'
+const re2='aradix'
+const re3='escitalopran'
+const re4='losartan'
+const re5='vitamina e'
+const re6='Elcal D'
 
   if(anterior !== dayString){
 
@@ -134,17 +133,17 @@ const re7='Remedio7'
 
 
 
-   //consulta remedio7 si esta envia email
-   const myVal7 = fechas.find(function(element) {
-    return element.nota === re7;
-  });
-  if(myVal7?.nota===undefined){
-      const doc7 = new Fecha();
-      doc7.nota = re7
-      doc7.fecha = dayString1
-      console.log('graba rem7')
-      await doc7.save();
-  }
+  //  //consulta remedio7 si esta envia email
+  //  const myVal7 = fechas.find(function(element) {
+  //   return element.nota === re7;
+  // });
+  // if(myVal7?.nota===undefined){
+  //     const doc7 = new Fecha();
+  //     doc7.nota = re7
+  //     doc7.fecha = dayString1
+  //     console.log('graba rem7')
+  //     await doc7.save();
+  // }
 
 
 
