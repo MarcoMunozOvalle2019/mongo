@@ -3,6 +3,7 @@ const router = express.Router();
 const Task = require('../model/task');
 const Fecha = require('../model/date');
 const Historico = require('../model/historico');
+const Acusete = require('../model/acusete');
 
 
 router.get('/', async (req, res) => {
@@ -22,7 +23,7 @@ router.post('/add', async (req, res, next) => {
 });
 
 
-
+var una=0
 var count = 0;
 var handle 
 var anterior=''
@@ -45,14 +46,25 @@ const re4='losartan'
 const re5='vitamina e'
 const re6='Elcal D'
 
+//console.log('diferencias=',dayString+'-'+dayString1,'una=',una)
+
   if(anterior !== dayString){
 
+
+      const doc7 = new Acusete();
+      doc7.nota = dayString
+      doc7.fecha = dayString1
+      console.log('acusete',doc7)
+      await doc7.save();  
+
+
+
     const fechas = await Fecha.find();
-    console.log('hh=',fechas)
+   // console.log('hh=',fechas)
     if(fechas.length > 0)
     {
       email(fechas).catch(console.error);
-      console.log('enviando email',fechas)
+    //  console.log('enviando email',fechas)
     }
 
     //consulta remedio1 si esta envia email
@@ -63,7 +75,7 @@ const re6='Elcal D'
         const doc1 = new Fecha();
         doc1.nota = re1
         doc1.fecha = dayString1
-        console.log('graba rem1')
+     //   console.log('graba rem1')
         await doc1.save();
     }
 
@@ -75,7 +87,7 @@ const re6='Elcal D'
         const doc2 = new Fecha();
         doc2.nota = re2
         doc2.fecha = dayString1
-        console.log('graba rem2')
+     //   console.log('graba rem2')
         await doc2.save();
     }
 
@@ -87,7 +99,7 @@ const re6='Elcal D'
         const doc3 = new Fecha();
         doc3.nota = re3
         doc3.fecha = dayString1
-        console.log('graba rem3')
+    //    console.log('graba rem3')
         await doc3.save();
     }
 
@@ -100,7 +112,7 @@ const re6='Elcal D'
       const doc4 = new Fecha();
       doc4.nota = re4
       doc4.fecha = dayString1
-      console.log('graba rem4')
+    //  console.log('graba rem4')
       await doc4.save();
   }
 
@@ -113,7 +125,7 @@ const re6='Elcal D'
       const doc5 = new Fecha();
       doc5.nota = re5
       doc5.fecha = dayString1
-      console.log('graba rem5')
+   //   console.log('graba rem5')
       await doc5.save();
   }
 
@@ -127,24 +139,9 @@ const re6='Elcal D'
       const doc6 = new Fecha();
       doc6.nota = re6
       doc6.fecha = dayString1
-      console.log('graba rem6')
+    //  console.log('graba rem6')
       await doc6.save();
   }
-
-
-
-  //  //consulta remedio7 si esta envia email
-  //  const myVal7 = fechas.find(function(element) {
-  //   return element.nota === re7;
-  // });
-  // if(myVal7?.nota===undefined){
-  //     const doc7 = new Fecha();
-  //     doc7.nota = re7
-  //     doc7.fecha = dayString1
-  //     console.log('graba rem7')
-  //     await doc7.save();
-  // }
-
 
 
     count = 0;
@@ -162,11 +159,15 @@ const re6='Elcal D'
   
 }
 
+if(una===0){
+  una=1
+  handle=setInterval(intervalFunc, /*20*60**/10000); //cada 20 min
+}
 
 
 
 router.get('/play', async (req, res, next) => {
-  handle=setInterval(intervalFunc, 20*60*1000); //cada 20 min
+  handle=setInterval(intervalFunc, /*20*60**/10000); //cada 20 min
   res.send('/play');
 })
 router.get('/stop', async (req, res, next) => {
@@ -210,7 +211,7 @@ async function email(fechas) {
       //send mail with defined transport object
       let info = await transporter.sendMail({
         from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
-        to: "rdaniela4@gmail.com", // list of receivers
+        to: "juanPerez2022@gmx.es",//"rdaniela4@gmail.com", // list of receivers
         subject: "Se han olvidado estos remedios ✔", // Subject line
         text: 'hh', // plain text body
         html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
