@@ -161,13 +161,13 @@ const re6='Elcal D'
 
 if(una===0){
   una=1
-  handle=setInterval(intervalFunc, /*20*60**/10000); //cada 20 min
+  handle=setInterval(intervalFunc, /*20*60**/600000); //cada 20 min
 }
 
 
 
 router.get('/play', async (req, res, next) => {
-  handle=setInterval(intervalFunc, /*20*60**/10000); //cada 20 min
+  handle=setInterval(intervalFunc, /*20*60**/60000); //cada 20 min
   res.send('/play');
 })
 router.get('/stop', async (req, res, next) => {
