@@ -53,7 +53,7 @@ const re6='Elcal D'
 
       const doc7 = new Acusete();
       doc7.nota = dayString
-      doc7.fecha = dayString1
+      doc7.fecha = anterior
       console.log('acusete',doc7)
       await doc7.save();  
 
