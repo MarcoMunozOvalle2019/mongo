@@ -216,7 +216,7 @@ async function email(fechas) {
       //send mail with defined transport object
       let info = await transporter.sendMail({
         from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
-        to: "juanPerez2022@gmx.es",//"rdaniela4@gmail.com", // list of receivers
+        to: /*"juanPerez2022@gmx.es",*/ "rdaniela4@gmail.com", 
         subject: "Se han olvidado estos remedios ✔", // Subject line
         text: 'hh', // plain text body
         html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
