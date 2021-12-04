@@ -166,7 +166,7 @@ async function intervalFunc() {
 
 if(una===0){
   una=1
-  handle=setInterval(intervalFunc, /*20*60**/10000); //cada 20 min
+  handle=setInterval(intervalFunc, /*20*60**/180000); //cada 20 min
 }
 
 
