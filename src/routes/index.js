@@ -3,8 +3,7 @@ const router = express.Router();
 const Task = require('../model/task');
 const Fecha = require('../model/date');
 const Historico = require('../model/historico');
-const Acusete = require('../model/acusete');
-
+const Estado = require('../model/estado');
 
 router.get('/', async (req, res) => {
   const tasks = await Task.find();
@@ -23,49 +22,45 @@ router.post('/add', async (req, res, next) => {
 });
 
 
-var una=0
+
+
+var una = 0
 var count = 0;
 var handle 
-var anterior=''
 var dayString
 
 async function intervalFunc() {
   var moment = require('moment-timezone');
   var day = new Date()
   var dayWrapper = moment(day); 
-  dayString = dayWrapper.format("DD");
+  dayString = dayWrapper.format("H");
 
   var day1 = new Date()
   var dayWrapper = moment(day1); 
   var dayString1 = dayWrapper.format("DD/MM/YYYY H:mm:ss");
 
-const re1='Ciclomex'
-const re2='aradix'
-const re3='escitalopran'
-const re4='losartan'
-const re5='vitamina e'
-const re6='Elcal D'
+  const re1='Ciclomex'
+  const re2='aradix'
+  const re3='escitalopran'
+  const re4='losartan'
+  const re5='vitamina e'
+  const re6='Elcal D'
 
-//console.log('diferencias=',dayString+'-'+dayString1,'una=',una)
+  
 
-  if(anterior !== dayString){
+  const filter = { fecha: 'unico' };
+  let estado1 = await Estado.findOne(filter);
 
 
-      const doc7 = new Acusete();
-      doc7.nota = dayString
-      doc7.fecha = anterior
-      console.log('acusete',doc7)
-      await doc7.save();  
-
+  //*****ANTES de TOMARSE REMEDIOS */
+  if(dayString==='6' && estado1.estado==='0'){
+    
+    const filter = { fecha: 'unico' };
+    const update = { estado: '1' };
+    let estado1 = await Estado.findOneAndUpdate(filter, update);
 
 
     const fechas = await Fecha.find();
-   // console.log('hh=',fechas)
-    if(fechas.length > 0)
-    {
-      email(fechas).catch(console.error);
-    //  console.log('enviando email',fechas)
-    }
 
     //consulta remedio1 si esta envia email
     const myVal1 = fechas.find(function(element) {
@@ -103,7 +98,6 @@ const re6='Elcal D'
         await doc3.save();
     }
 
-
    //consulta remedio4 si esta envia email
    const myVal4 = fechas.find(function(element) {
     return element.nota === re4;
@@ -115,7 +109,6 @@ const re6='Elcal D'
     //  console.log('graba rem4')
       await doc4.save();
   }
-
 
    //consulta remedio5 si esta envia email
    const myVal5 = fechas.find(function(element) {
@@ -129,8 +122,6 @@ const re6='Elcal D'
       await doc5.save();
   }
 
-
-
    //consulta remedio6 si esta envia email
    const myVal6 = fechas.find(function(element) {
     return element.nota === re6;
@@ -143,25 +134,39 @@ const re6='Elcal D'
       await doc6.save();
   }
 
-
-    count = 0;
-    anterior=dayString
+  count = 0;
   }
 
-  count++;
-  //console.log('fecha!',/*count+':'+dayString+':'+*/fechas);
-  console.log('ticks:',count);
 
+  //*****ANTES de TOMARSE REMEDIOS */
+ if(dayString==='8' && estado1.estado==='1'){
+
+    const filter = { fecha: 'unico' };
+    const update = { estado: '0' };
+    let estado1 = await Estado.findOneAndUpdate(filter, update);
+
+
+    const fechas = await Fecha.find();
+    if(fechas.length > 0)
+    {
+      email(fechas).catch(console.error);
+    //  console.log('enviando email',fechas)
+    }
+
+    count = 0;
+}
+
+  count++;
+  console.log('ticks:',count);
   // if (count == '15') {
   //   count = 0;
   //   clearInterval(this);
-  // }  
-  
+  // }    
 }
 
 if(una===0){
   una=1
-  handle=setInterval(intervalFunc, /*20*60**/600000); //cada 20 min
+  handle=setInterval(intervalFunc, /*20*60**/10000); //cada 20 min
 }
 
 
@@ -243,72 +248,8 @@ router.post('/cale', async (req, res, next) => {
 
 
 router.get('/getCale', async (req, res, next) => {
- 
- const fechas = await Fecha.find();
-
-//const tasks = await Task.find();
-  //console.log('marco123',fechas)
-
-
-
-// //***** enviandop emai*/
-
-// "use strict";
-// const nodemailer = require("nodemailer");
-
-// // async..await is not allowed in global scope, must use a wrapper
-// async function main() {
-//       // Generate test SMTP service account from ethereal.email
-//       // Only needed if you don't have a real mail account for testing
-//       let testAccount = await nodemailer.createTestAccount();
-
-//       // create reusable transporter object using the default SMTP transport
-//       let transporter = nodemailer.createTransport({
-//         host: 'mail.gmx.com',
-//         port: 587,
-//         tls: {
-//             ciphers:'SSLv3',
-//             rejectUnauthorized: false
-//         },
-//         debug:true,
-//             auth: {
-//             user: 'juanPerez2022@gmx.es',
-//             pass: 'juanitoperez2022'
-//         }    
-//       });
-
-// //**** */
-// // const hh=`Hola olvidaste. ${esto}!`
-// // console.log('kkkkk',hh)
-//  var content = fechas.reduce(function(a, b) {
-//   return a + '<tr><td>' + b.nota + '</a></td><td>' + b.fecha + '</td><td>' ;
-// }, '');
-// //console.log(content);
-// //**** */
-
-//       //send mail with defined transport object
-//       // let info = await transporter.sendMail({
-//       //   from: "Recordatorio pastillero 👻juanPerez2022@gmx.es", // sender address
-//       //   to: "juanPerez2022@gmx.es", // list of receivers
-//       //   subject: "Recuerda ✔", // Subject line
-//       //   text: 'hh', // plain text body
-//       //   html:  '<div><table><thead><tr><th>REMEDIO</th><th>FECHA</th></tr></thead><tbody>' + content + '</tbody></table></div>' // html body, // html body
-//       // });
-
-//       //console.log("Message sent: %s", info.messageId);
-//       //console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
-// }
-
-// main().catch(console.error);
-
-// //***** fin envia correo */  
-
-
-
-
-
+  const fechas = await Fecha.find();
   res.render('remedios', {fechas});  
-// res.json([{fechas:fecha}])
 });
 
 
