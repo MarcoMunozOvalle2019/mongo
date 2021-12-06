@@ -53,7 +53,7 @@ async function intervalFunc() {
 
 
   //*****ANTES de TOMARSE REMEDIOS */
-  if(dayString==='6' && estado1.estado==='0'){
+  if(dayString==='5' && estado1.estado==='0'){
     
     const filter = { fecha: 'unico' };
     const update = { estado: '1' };
@@ -139,7 +139,7 @@ async function intervalFunc() {
 
 
   //*****ANTES de TOMARSE REMEDIOS */
- if(dayString==='8' && estado1.estado==='1'){
+ if(dayString==='9' && estado1.estado==='1'){
 
     const filter = { fecha: 'unico' };
     const update = { estado: '0' };
