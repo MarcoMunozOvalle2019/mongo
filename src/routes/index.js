@@ -264,7 +264,7 @@ router.get('/getCale', async (req, res, next) => {
 
   var day2 = new Date()
   var dayWrapper2 = moment(day2); 
-  var dayString2 = dayWrapper2.format("DD:H:mm");
+  var dayString2 = dayWrapper2.format("DD:H:mm:ss");
 
   res.render('remedios', {fechas,estado1,dayString2});  
 });
