@@ -261,7 +261,11 @@ router.get('/getCale', async (req, res, next) => {
   const filter = { fecha: 'unico' };
   let estado1 = await Estado.findOne(filter);
 
-  res.render('remedios', {fechas,estado1});  
+  var day2 = new Date()
+  var dayWrapper2 = moment(day2); 
+  var dayString2 = dayWrapper2.format("DD/MM/YYYY H:mm:ss");
+
+  res.render('remedios', {fechas,estado1,dayString2});  
 });
 
 
