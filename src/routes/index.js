@@ -52,7 +52,7 @@ async function intervalFunc() {
   let estado1 = await Estado.findOne(filter);
 
   //*****ANTES de TOMARSE REMEDIOS */
-  if(dayString==='27' && estado1.estado==='0'){
+  if(dayString==='35' && estado1.estado==='0'){
     
     const filter = { fecha: 'unico' };
     const update = { estado: '1' };
@@ -147,7 +147,7 @@ async function intervalFunc() {
 
 
   //*****ANTES de TOMARSE REMEDIOS */
- if(dayString==='28' && estado1.estado==='1'){
+ if(dayString==='36' && estado1.estado==='1'){
 
     const filter = { fecha: 'unico' };
     const update = { estado: '0' };
@@ -256,6 +256,7 @@ router.post('/cale', async (req, res, next) => {
 
 
 router.get('/getCale', async (req, res, next) => {
+  var moment = require('moment-timezone');
   const fechas = await Fecha.find();
 
   const filter = { fecha: 'unico' };
@@ -263,7 +264,7 @@ router.get('/getCale', async (req, res, next) => {
 
   var day2 = new Date()
   var dayWrapper2 = moment(day2); 
-  var dayString2 = dayWrapper2.format("DD/MM/YYYY H:mm:ss");
+  var dayString2 = dayWrapper2.format("DD:H:mm");
 
   res.render('remedios', {fechas,estado1,dayString2});  
 });
