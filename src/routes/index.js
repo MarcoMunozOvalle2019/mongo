@@ -52,11 +52,20 @@ async function intervalFunc() {
   let estado1 = await Estado.findOne(filter);
 
   //*****ANTES de TOMARSE REMEDIOS */
-  if(dayString==='19' && estado1.estado==='0'){
+  if(dayString==='24' && estado1.estado==='0'){
     
     const filter = { fecha: 'unico' };
     const update = { estado: '1' };
     let estado1 = await Estado.findOneAndUpdate(filter, update);
+
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    (async () => {
+      console.log('1');
+      await delay(1000);
+      console.log('2');
+    })();
+
 
 
     const fechas = await Fecha.find();
@@ -138,7 +147,7 @@ async function intervalFunc() {
 
 
   //*****ANTES de TOMARSE REMEDIOS */
- if(dayString==='20' && estado1.estado==='1'){
+ if(dayString==='25' && estado1.estado==='1'){
 
     const filter = { fecha: 'unico' };
     const update = { estado: '0' };
