@@ -33,7 +33,7 @@ async function intervalFunc() {
   var moment = require('moment-timezone');
   var day = new Date()
   var dayWrapper = moment(day); 
-  dayString = dayWrapper.format("mm");
+  dayString = dayWrapper.format("DD");
 
   var day1 = new Date()
   var dayWrapper = moment(day1); 
@@ -52,7 +52,7 @@ async function intervalFunc() {
   let estado1 = await Estado.findOne(filter);
 
   //*****ANTES de TOMARSE REMEDIOS */
-  if(dayString==='37' && estado1.estado==='0'){
+  if(dayString==='5' && estado1.estado==='0'){
     
     const filter = { fecha: 'unico' };
     const update = { estado: '1' };
@@ -147,7 +147,7 @@ async function intervalFunc() {
 
 
   //*****ANTES de TOMARSE REMEDIOS */
- if(dayString==='38' && estado1.estado==='1'){
+ if(dayString==='9' && estado1.estado==='1'){
 
     const filter = { fecha: 'unico' };
     const update = { estado: '0' };
@@ -174,7 +174,7 @@ async function intervalFunc() {
 
 if(una===0){
   una=1
-  handle=setInterval(intervalFunc, /*20*60**/10000); //cada 20 min
+  handle=setInterval(intervalFunc, /*20*60**/50000); //cada 20 min
 }
 
 
