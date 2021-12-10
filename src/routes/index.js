@@ -52,7 +52,7 @@ async function intervalFunc() {
   let estado1 = await Estado.findOne(filter);
 
   //*****ANTES de TOMARSE REMEDIOS */
-  if(dayString==='35' && estado1.estado==='0'){
+  if(dayString==='37' && estado1.estado==='0'){
     
     const filter = { fecha: 'unico' };
     const update = { estado: '1' };
@@ -147,7 +147,7 @@ async function intervalFunc() {
 
 
   //*****ANTES de TOMARSE REMEDIOS */
- if(dayString==='36' && estado1.estado==='1'){
+ if(dayString==='38' && estado1.estado==='1'){
 
     const filter = { fecha: 'unico' };
     const update = { estado: '0' };
