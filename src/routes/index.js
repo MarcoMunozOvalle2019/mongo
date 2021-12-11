@@ -33,7 +33,7 @@ async function intervalFunc() {
   var moment = require('moment-timezone');
   var day = new Date()
   var dayWrapper = moment(day); 
-  dayString = dayWrapper.format("DD");
+  dayString = dayWrapper.format("H");
 
   var day1 = new Date()
   var dayWrapper = moment(day1); 
