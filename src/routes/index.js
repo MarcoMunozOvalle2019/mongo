@@ -270,7 +270,9 @@ router.get('/getCale', async (req, res, next) => {
 });
 
 
-
+router.get('/healthCheck', async (req, res, next) => {
+  res.sendStatus(200).json({'ok':1});
+});
 
 router.get('/turn/:id', async (req, res, next) => {
   let { id } = req.params;
