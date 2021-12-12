@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Task = require('../model/task');
 const Fecha = require('../model/date');
+const Health = require('../model/healthCheck');
 const Historico = require('../model/historico');
 const Estado = require('../model/estado');
 
@@ -312,6 +313,15 @@ router.get('/getCale', async (req, res, next) => {
 
 
 router.get('/healthCheck', async (req, res, next) => {
+
+  var day12 = new Date()
+  var dayWrapper12 = moment(day12); 
+  var dayString12 = dayWrapper2.format("DD:H:mm:ss");
+  
+  const doc14 = new Health();
+  doc14.nota = 'ok'
+  doc14.fecha = dayString12
+  await doc14.save();  
 
   res.send('Ok')
 });
