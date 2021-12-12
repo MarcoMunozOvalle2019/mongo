@@ -22,10 +22,49 @@ router.post('/add', async (req, res, next) => {
 });
 
 
+///******************************************************* */
+async function intervalFuncPrueba() {
+  var http = require('http'); //importing http
+  countPrueba++;
+  console.log('ticks:',countPrueba);
+  if (countPrueba == '55') {
+    count = 0;
+    clearInterval(this);
+  }    
+
+
+  var options = {
+    host: 'mongo2022.herokuapp.com',
+    port: 80,
+    path: '/healthCheck',
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+};
+  http.get(options, function(res) {
+    res.on('data', function(chunk) {
+        try {
+            // optional logging... disable after it's working
+            console.log("HEROKU RESPONSE: " + chunk);
+        } catch (err) {
+            console.log(err.message);
+        }
+    });
+}).on('error', function(err) {
+    console.log("Error: " + err.message);
+});
+
+
+
+
+}
+///******************************************************** */
 
 
 var una = 0
 var count = 0;
+var countPrueba = 0;
 var handle 
 var dayString
 
@@ -174,15 +213,17 @@ async function intervalFunc() {
 
 if(una===0){
   una=1
-  handle=setInterval(intervalFunc, /*20*60**/50000); //cada 20 min
+  handle=setInterval(intervalFunc, /*20*60**/180000); //cada 20 min
+  handle=setInterval(intervalFuncPrueba, 300000); //5min
 }
 
 
 
 router.get('/play', async (req, res, next) => {
-  handle=setInterval(intervalFunc, /*20*60**/6000); //cada 20 min
+  handle=setInterval(intervalFuncPrueba, 180000); 
   res.send('/play');
 })
+
 router.get('/stop', async (req, res, next) => {
   count = 0;
   clearInterval(handle);
