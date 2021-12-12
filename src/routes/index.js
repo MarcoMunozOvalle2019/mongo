@@ -44,10 +44,12 @@ async function intervalFuncPrueba() {
     }
 };
   http.get(options, function(res) {
-    res.on('data', function(chunk) {
+    res.on('data', async function(chunk) {
         try {
             // optional logging... disable after it's working
+        
             console.log("HEROKU RESPONSE: " + chunk);
+            
         } catch (err) {
             console.log(err.message);
         }
@@ -313,16 +315,15 @@ router.get('/getCale', async (req, res, next) => {
 
 
 router.get('/healthCheck', async (req, res, next) => {
-
+  var moment = require('moment-timezone');
   var day12 = new Date()
   var dayWrapper12 = moment(day12); 
-  var dayString12 = dayWrapper2.format("DD:H:mm:ss");
+  var dayString12 = dayWrapper12.format("DD:H:mm:ss");
   
   const doc14 = new Health();
   doc14.nota = 'ok'
   doc14.fecha = dayString12
   await doc14.save();  
-
   res.send('Ok')
 });
 
