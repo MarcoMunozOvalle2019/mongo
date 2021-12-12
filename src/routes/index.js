@@ -217,10 +217,8 @@ async function intervalFunc() {
 if(una===0){
   una=1
   handle=setInterval(intervalFunc, /*20*60**/180000); //cada 20 min
-  handle=setInterval(intervalFuncPrueba, 900000); //5min
+  handle=setInterval(intervalFuncPrueba, 1000000); //5min
 }
-
-
 
 router.get('/play', async (req, res, next) => {
   handle=setInterval(intervalFuncPrueba, 180000); 
