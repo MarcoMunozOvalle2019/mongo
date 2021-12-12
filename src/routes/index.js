@@ -52,7 +52,7 @@ async function intervalFunc() {
   let estado1 = await Estado.findOne(filter);
 
   //*****ANTES de TOMARSE REMEDIOS */
-  if(dayString==='5' && estado1.estado==='0'){
+  if(dayString==='6' && estado1.estado==='0'){
     
     const filter = { fecha: 'unico' };
     const update = { estado: '1' };
@@ -147,7 +147,7 @@ async function intervalFunc() {
 
 
   //*****ANTES de TOMARSE REMEDIOS */
- if(dayString==='9' && estado1.estado==='1'){
+ if(dayString==='8' && estado1.estado==='1'){
 
     const filter = { fecha: 'unico' };
     const update = { estado: '0' };
@@ -271,7 +271,8 @@ router.get('/getCale', async (req, res, next) => {
 
 
 router.get('/healthCheck', async (req, res, next) => {
-  res.sendStatus(200).json({'ok':1});
+
+  res.send('Ok')
 });
 
 router.get('/turn/:id', async (req, res, next) => {
