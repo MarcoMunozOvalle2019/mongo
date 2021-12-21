@@ -5,6 +5,7 @@ const Fecha = require('../model/date');
 const Health = require('../model/healthCheck');
 const Historico = require('../model/historico');
 const Estado = require('../model/estado');
+bodyParser = require('body-parser').json();
 
 router.get('/', async (req, res) => {
   const tasks = await Task.find();
@@ -295,7 +296,21 @@ router.post('/cale', async (req, res, next) => {
   res.redirect('/getCale');
 });
 
+router.post('/falabella', bodyParser, async (req, res, next) => {
+  var moment = require('moment-timezone');
+ var day = new Date()
+ var dayWrapper = moment(day); 
+ var dayString = dayWrapper.format("DD/MM/YYYY H:mm:ss");
+ const ff = JSON.stringify(req.body.marco)
 
+ const doc = new Health();
+ doc.nota = ff
+ doc.fecha = dayString
+ await doc.save();
+ 
+
+ res.json({marco:req.body.marco})
+});
 
 router.get('/getCale', async (req, res, next) => {
   var moment = require('moment-timezone');
