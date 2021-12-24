@@ -301,7 +301,7 @@ router.post('/falabella', bodyParser, async (req, res, next) => {
  var day = new Date()
  var dayWrapper = moment(day); 
  var dayString = dayWrapper.format("DD/MM/YYYY H:mm:ss");
- const ff = JSON.stringify(req.body.marco)
+ const ff = JSON.stringify(req.body)
 
  const doc = new Health();
  doc.nota = ff
@@ -309,7 +309,7 @@ router.post('/falabella', bodyParser, async (req, res, next) => {
  await doc.save();
  
 
- res.json({marco:req.body.marco})
+ res.json({marco:req.body})
 });
 
 router.get('/getCale', async (req, res, next) => {
