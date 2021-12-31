@@ -226,6 +226,100 @@ router.get('/play', async (req, res, next) => {
   res.send('/play');
 })
 
+
+router.get('/agrega', async (req, res, next) => {
+  const re1='Ciclomex'
+  const re2='aradix'
+  const re3='escitalopran'
+  const re4='losartan'
+  const re5='vitamina e'
+  const re6='Elcal D'
+  var moment = require('moment-timezone');
+
+  const filter = { fecha: 'unico' };
+  const update = { estado: '0' };
+  let estado1 = await Estado.findOneAndUpdate(filter, update);
+
+  var day1 = new Date()
+  var dayWrapper = moment(day1); 
+  var dayString1 = dayWrapper.format("DD/MM/YYYY H:mm:ss");  
+  const fechas = await Fecha.find();
+
+  //consulta remedio1 si esta envia email
+  const myVal1 = fechas.find(function(element) {
+    return element.nota === re1;
+  });
+  if(myVal1?.nota===undefined){
+      const doc1 = new Fecha();
+      doc1.nota = re1
+      doc1.fecha = dayString1
+   //   console.log('graba rem1')
+      await doc1.save();
+  }
+
+  //consulta remedio2 si esta envia email
+  const myVal2 = fechas.find(function(element) {
+    return element.nota === re2;
+  });
+  if(myVal2?.nota===undefined){
+      const doc2 = new Fecha();
+      doc2.nota = re2
+      doc2.fecha = dayString1
+   //   console.log('graba rem2')
+      await doc2.save();
+  }
+
+ //consulta remedio3 si esta envia email
+  const myVal3 = fechas.find(function(element) {
+    return element.nota === re3;
+  });
+  if(myVal3?.nota===undefined){
+      const doc3 = new Fecha();
+      doc3.nota = re3
+      doc3.fecha = dayString1
+  //    console.log('graba rem3')
+      await doc3.save();
+  }
+
+ //consulta remedio4 si esta envia email
+ const myVal4 = fechas.find(function(element) {
+  return element.nota === re4;
+});
+if(myVal4?.nota===undefined){
+    const doc4 = new Fecha();
+    doc4.nota = re4
+    doc4.fecha = dayString1
+  //  console.log('graba rem4')
+    await doc4.save();
+}
+
+ //consulta remedio5 si esta envia email
+ const myVal5 = fechas.find(function(element) {
+  return element.nota === re5;
+});
+if(myVal5?.nota===undefined){
+    const doc5 = new Fecha();
+    doc5.nota = re5
+    doc5.fecha = dayString1
+ //   console.log('graba rem5')
+    await doc5.save();
+}
+
+ //consulta remedio6 si esta envia email
+ const myVal6 = fechas.find(function(element) {
+  return element.nota === re6;
+});
+if(myVal6?.nota===undefined){
+    const doc6 = new Fecha();
+    doc6.nota = re6
+    doc6.fecha = dayString1
+  //  console.log('graba rem6')
+    await doc6.save();
+}
+
+res.redirect('/getCale');
+})
+
 router.get('/stop', async (req, res, next) => {
   count = 0;
   clearInterval(handle);
