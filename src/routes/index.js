@@ -190,7 +190,7 @@ async function intervalFunc() {
 
 
   //*****ANTES de TOMARSE REMEDIOS */
- if(dayString==='8' && estado1.estado==='1'){
+ if(dayString==='9' && estado1.estado==='1'){
 
     const filter = { fecha: 'unico' };
     const update = { estado: '0' };
