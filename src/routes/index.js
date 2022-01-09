@@ -28,7 +28,8 @@ router.post('/add', async (req, res, next) => {
 async function intervalFuncPrueba() {
   var http = require('http'); //importing http
   countPrueba++;
-  console.log('ticks:',countPrueba);
+  //console.log('ticks:',countPrueba);
+  
   if (countPrueba == '55') {
     count = 0;
     clearInterval(this);
@@ -61,7 +62,6 @@ async function intervalFuncPrueba() {
 
 
 
-
 }
 ///******************************************************** */
 
@@ -71,6 +71,7 @@ var count = 0;
 var countPrueba = 0;
 var handle 
 var dayString
+var ttt
 
 async function intervalFunc() {
   var moment = require('moment-timezone');
@@ -208,6 +209,7 @@ async function intervalFunc() {
 }
 
   count++;
+  ttt=count
   console.log('ticks:',count);
   // if (count == '15') {
   //   count = 0;
@@ -218,7 +220,7 @@ async function intervalFunc() {
 if(una===0){
   una=1
   handle=setInterval(intervalFunc, /*20*60**/180000); //cada 20 min
-  handle=setInterval(intervalFuncPrueba, 1500000000); //5min
+  handle=setInterval(intervalFuncPrueba, 1500000); //5min
 }
 
 router.get('/play', async (req, res, next) => {
@@ -417,7 +419,8 @@ router.get('/getCale', async (req, res, next) => {
   var dayWrapper2 = moment(day2); 
   var dayString2 = dayWrapper2.format("DD:H:mm:ss");
 
-  res.render('remedios', {fechas,estado1,dayString2});  
+  console.log('avrei',ttt)
+  res.render('remedios', {fechas,estado1,dayString2,ttt});  
 });
 
 
