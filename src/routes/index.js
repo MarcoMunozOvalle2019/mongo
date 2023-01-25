@@ -101,7 +101,7 @@ async function intervalFunc() {
     const filter = { fecha: 'unico' };
     const update = { estado: '1' };
     let estado1 = await Estado.findOneAndUpdate(filter, update);
-
+console.log('estado1',estado1)
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     (async () => {
