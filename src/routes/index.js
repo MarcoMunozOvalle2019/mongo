@@ -94,14 +94,14 @@ async function intervalFunc() {
 
   const filter = { fecha: 'unico' };
   let estado1 = await Estado.findOne(filter);
-
+  console.log('estado1',estado1)
   //*****ANTES de TOMARSE REMEDIOS */
   if(dayString==='6' && estado1.estado==='0'){
     
     const filter = { fecha: 'unico' };
     const update = { estado: '1' };
     let estado1 = await Estado.findOneAndUpdate(filter, update);
-console.log('estado1',estado1)
+
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     (async () => {
