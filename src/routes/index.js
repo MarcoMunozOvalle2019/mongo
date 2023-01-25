@@ -116,16 +116,17 @@ async function intervalFunc() {
 
     //consulta remedio1 si esta envia email
     const myVal1 = fechas.find(function(element) {
+      console.log('raro11',element)
       return element.nota === re1;
     });
-    console.log('raro1',myVal1)
-     if(myVal1?.nota===undefined){
+    console.log('raro1')
+    // if(myVal1?.nota===undefined){
     //     const doc1 = new Fecha();
     //     doc1.nota = re1
     //     doc1.fecha = dayString1
     //  //   console.log('graba rem1')
     //     await doc1.save();
-     }
+    // }
 
   //   //consulta remedio2 si esta envia email
   //   const myVal2 = fechas.find(function(element) {
