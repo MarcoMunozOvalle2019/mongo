@@ -8,7 +8,8 @@ const app = express();
 
 // connection to db
 //mongoose.connect('mongodb://mongo/database')
-console.log('puerto', process.env.URL)
+console.log('puerto1', process.env.URL)
+console.log('puerto2', process.env.PORT)
 //mongoose.connect('mongodb+srv://juanPerez2022:juanitoperez2022@cluster0.4vvdi.mongodb.net/test')
 mongoose.connect(process.env.URL)
 
