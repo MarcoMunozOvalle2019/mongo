@@ -127,65 +127,65 @@ async function intervalFunc() {
     //     await doc1.save();
     // }
 
-    //consulta remedio2 si esta envia email
-    const myVal2 = fechas.find(function(element) {
-      return element.nota === re2;
-    });
-    if(myVal2?.nota===undefined){
-        const doc2 = new Fecha();
-        doc2.nota = re2
-        doc2.fecha = dayString1
-     //   console.log('graba rem2')
-        await doc2.save();
-    }
+  //   //consulta remedio2 si esta envia email
+  //   const myVal2 = fechas.find(function(element) {
+  //     return element.nota === re2;
+  //   });
+  //   if(myVal2?.nota===undefined){
+  //       const doc2 = new Fecha();
+  //       doc2.nota = re2
+  //       doc2.fecha = dayString1
+  //    //   console.log('graba rem2')
+  //       await doc2.save();
+  //   }
 
-   //consulta remedio3 si esta envia email
-    const myVal3 = fechas.find(function(element) {
-      return element.nota === re3;
-    });
-    if(myVal3?.nota===undefined){
-        const doc3 = new Fecha();
-        doc3.nota = re3
-        doc3.fecha = dayString1
-    //    console.log('graba rem3')
-        await doc3.save();
-    }
+  //  //consulta remedio3 si esta envia email
+  //   const myVal3 = fechas.find(function(element) {
+  //     return element.nota === re3;
+  //   });
+  //   if(myVal3?.nota===undefined){
+  //       const doc3 = new Fecha();
+  //       doc3.nota = re3
+  //       doc3.fecha = dayString1
+  //   //    console.log('graba rem3')
+  //       await doc3.save();
+  //   }
 
-   //consulta remedio4 si esta envia email
-   const myVal4 = fechas.find(function(element) {
-    return element.nota === re4;
-  });
-  if(myVal4?.nota===undefined){
-      const doc4 = new Fecha();
-      doc4.nota = re4
-      doc4.fecha = dayString1
-    //  console.log('graba rem4')
-      await doc4.save();
-  }
+  //  //consulta remedio4 si esta envia email
+  //  const myVal4 = fechas.find(function(element) {
+  //   return element.nota === re4;
+  // });
+  // if(myVal4?.nota===undefined){
+  //     const doc4 = new Fecha();
+  //     doc4.nota = re4
+  //     doc4.fecha = dayString1
+  //   //  console.log('graba rem4')
+  //     await doc4.save();
+  // }
 
-   //consulta remedio5 si esta envia email
-   const myVal5 = fechas.find(function(element) {
-    return element.nota === re5;
-  });
-  if(myVal5?.nota===undefined){
-      const doc5 = new Fecha();
-      doc5.nota = re5
-      doc5.fecha = dayString1
-   //   console.log('graba rem5')
-      await doc5.save();
-  }
+  //  //consulta remedio5 si esta envia email
+  //  const myVal5 = fechas.find(function(element) {
+  //   return element.nota === re5;
+  // });
+  // if(myVal5?.nota===undefined){
+  //     const doc5 = new Fecha();
+  //     doc5.nota = re5
+  //     doc5.fecha = dayString1
+  //  //   console.log('graba rem5')
+  //     await doc5.save();
+  // }
 
-   //consulta remedio6 si esta envia email
-   const myVal6 = fechas.find(function(element) {
-    return element.nota === re6;
-  });
-  if(myVal6?.nota===undefined){
-      const doc6 = new Fecha();
-      doc6.nota = re6
-      doc6.fecha = dayString1
-    //  console.log('graba rem6')
-      await doc6.save();
-  }
+  //  //consulta remedio6 si esta envia email
+  //  const myVal6 = fechas.find(function(element) {
+  //   return element.nota === re6;
+  // });
+  // if(myVal6?.nota===undefined){
+  //     const doc6 = new Fecha();
+  //     doc6.nota = re6
+  //     doc6.fecha = dayString1
+  //   //  console.log('graba rem6')
+  //     await doc6.save();
+  // }
 
   count = 0;
   }
