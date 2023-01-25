@@ -74,6 +74,7 @@ var dayString
 var ttt
 
 async function intervalFunc() {
+  console.log('varias')
   var moment = require('moment-timezone');
   var day = new Date()
   var dayWrapper = moment(day); 
