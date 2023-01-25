@@ -118,6 +118,7 @@ async function intervalFunc() {
     const myVal1 = fechas.find(function(element) {
       return element.nota === re1;
     });
+    console.log('raro1',myVal1)
     if(myVal1?.nota===undefined){
         const doc1 = new Fecha();
         doc1.nota = re1
@@ -251,6 +252,7 @@ router.get('/agrega', async (req, res, next) => {
   const myVal1 = fechas.find(function(element) {
     return element.nota === re1;
   });
+  console.log('raro2',myVal1)
   if(myVal1?.nota===undefined){
       const doc1 = new Fecha();
       doc1.nota = re1
