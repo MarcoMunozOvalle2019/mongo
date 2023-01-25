@@ -8,7 +8,9 @@ const app = express();
 
 // connection to db
 //mongoose.connect('mongodb://mongo/database')
-mongoose.connect('mongodb+srv://juanPerez2022:juanitoperez2022@cluster0.4vvdi.mongodb.net/test')
+console.log('puerto', process.env.URL)
+//mongoose.connect('mongodb+srv://juanPerez2022:juanitoperez2022@cluster0.4vvdi.mongodb.net/test')
+mongoose.connect(process.env.URL)
 
   .then(db => console.log('db connected'))
   .catch(err => console.log(err));
@@ -20,7 +22,7 @@ const indexRoutes = require('./routes/index');
 app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'ejs');
-
+console.log('puerto', process.env.PORT)
 // middlewares
 app.use(morgan('dev'));
 app.use(express.urlencoded({extended: false}))
